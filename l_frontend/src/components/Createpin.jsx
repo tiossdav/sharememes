@@ -9,7 +9,7 @@ import { categories } from "../utils/data";
 // import { client } from "../client";
 // import { categories } from "../utils/data";
 
-const Createpin = ({ user }) => {
+const CreatePin = ({ user }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [about, setAbout] = useState("");
@@ -206,4 +206,4 @@ const Createpin = ({ user }) => {
   );
 };
 
-export default Createpin;
+export default CreatePin;

@@ -15,7 +15,6 @@ const PinDetail = ({ user }) => {
   const [addingComment, setAddingComment] = useState(false);
   const { pinId } = useParams();
 
-  console.log(pinDetail);
   const fetchPinDetail = () => {
     const query = pinDetailQuery(pinId);
     client.fetch(query).then((data) => {
@@ -31,6 +30,7 @@ const PinDetail = ({ user }) => {
 
   useEffect(() => {
     fetchPinDetail();
+    console.log(fetchPinDetail());
   }, [pinId]);
 
   if (!pinDetail) return <Spinner message="Loading Pin Details" />;
@@ -55,6 +55,7 @@ const PinDetail = ({ user }) => {
         .commit()
         .then(() => {
           fetchPinDetail();
+          console.log(fetchPinDetail());
         });
     }
   };
@@ -85,7 +86,9 @@ const PinDetail = ({ user }) => {
               </a>
             </div>
             <a href={pinDetail?.destination} target="_blank" rel="noreferrer">
-              {pinDetail?.destination}
+              {pinDetail?.destination.length > 15
+                ? `${pinDetail?.destination.slice(0, 15)}...`
+                : pinDetail?.destination}
             </a>
           </div>
           <div>
@@ -146,7 +149,7 @@ const PinDetail = ({ user }) => {
               onClick={addComment}
               className="bg-red-500 text-white rounded-ful px-6 py-2 font-semibold text-base outline-none"
             >
-              {addingComment ? "Posting the comment..." : "Posted"}
+              {addingComment ? "Posting the comment..." : "Post"}
             </button>
           </div>
         </div>
