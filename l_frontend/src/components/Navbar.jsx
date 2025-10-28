@@ -2,8 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdSearch } from "react-icons/io";
 
-const Navbar = ({ searchTerm, setSEarchTerm, user }) => {
+const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
   if (!user) return null;
   return (
     <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
@@ -11,7 +14,7 @@ const Navbar = ({ searchTerm, setSEarchTerm, user }) => {
         <IoMdSearch fontSize={21} className="ml-1" />
         <input
           type="text"
-          onChange={(e) => setSEarchTerm(e.target.value)}
+          onChange={handleSearch}
           placeholder="Search"
           value={searchTerm}
           onFocus={() => navigate("/search")}

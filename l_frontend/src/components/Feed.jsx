@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { client } from "../client";
 import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
-import { feedQuery, searchQuery } from "../utils/data";
+import { categoryQuery, feedQuery } from "../utils/data";
 
 const Feed = () => {
   const [loading, setLoading] = useState(false);
@@ -14,9 +14,11 @@ const Feed = () => {
   useEffect(() => {
     setLoading(true);
 
+    console.log(categoryId);
     if (categoryId) {
-      const query = searchQuery(categoryId);
+      const query = categoryQuery(categoryId);
 
+      console.log(query);
       client.fetch(query).then((data) => {
         setPins(data);
         setLoading(false);
@@ -27,7 +29,7 @@ const Feed = () => {
         setLoading(false);
       });
     }
-  }, []);
+  }, [categoryId]);
 
   const handleAddPin = (newPin) => {
     setPins((prevPins) => [newPin, ...prevPins]);
